@@ -10,29 +10,23 @@ import java.time.temporal.TemporalAccessor;
  */
 public abstract class Task {
     protected String description;
-    protected boolean isCompleted;
-
-    /** Enum to represent the type of task to be added. */
-    public enum TaskType {
-        TODO, DEADLINE, EVENT
-    }
+    protected boolean isDone;
 
     /**
      * Constructor for Task.
      *
      * @param description Description of the task.
-     * @param isCompleted Whether the task is completed.
      */
-    protected Task(String description, boolean isCompleted) {
+    public Task(String description) {
         this.description = description;
-        this.isCompleted = isCompleted;
+        this.isDone = false;
     }
 
     /** Returns a string representation of the task to be stored in the data file. */
     public abstract String getDataString();
 
     protected String getStatusIcon() {
-        return (isCompleted ? "X" : " ");
+        return (isDone ? "X" : " ");
     }
 
     protected String getDescription() {
@@ -59,7 +53,7 @@ public abstract class Task {
      * @return The task itself.
      */
     public Task markAsDone() {
-        this.isCompleted = true;
+        this.isDone = true;
         return this;
     }
 
@@ -69,7 +63,7 @@ public abstract class Task {
      * @return The task itself.
      */
     public Task markAsUndone() {
-        this.isCompleted = false;
+        this.isDone = false;
         return this;
     }
 
